@@ -249,15 +249,24 @@ h3 {
 
 .prediction-badge-win {
     background-color: var(--success-color);
+    display: inline-block;
+    text-align: center;
+    width: 60px; /* Fixed width for consistent alignment */
 }
 
 .prediction-badge-loss {
     background-color: var(--secondary-color);
+    display: inline-block;
+    text-align: center;
+    width: 60px; /* Fixed width for consistent alignment */
 }
 
 .prediction-badge-unsure {
     background-color: var(--warning-color);
     color: white;
+    display: inline-block;
+    text-align: center;
+    width: 60px; /* Fixed width for consistent alignment */
 }
 
 .win-prediction {
@@ -335,6 +344,15 @@ h3 {
 .table th {
     background-color: rgba(0, 206, 201, 0.1);
     font-weight: 600;
+    text-align: center; /* Center-align all table content */
+    vertical-align: middle; /* Vertically center content */
+    word-wrap: break-word; /* Prevent excessive wrapping */
+}
+
+.table td {
+    text-align: center; /* Center-align all table content */
+    vertical-align: middle; /* Vertically center content */
+    word-wrap: break-word; /* Prevent excessive wrapping */
 }
 
 .table-bordered td, .table-bordered th {
@@ -396,11 +414,11 @@ h3 {
     }
     
     .table {
-        font-size: 0.9rem;
+        font-size: 0.85rem; /* Slightly smaller font size for better fit */
     }
 
     .table th, .table td {
-        padding: 0.5rem;
+        padding: 0.4rem; /* Reduce padding for compact layout */
     }
     
     .badge {
@@ -415,6 +433,10 @@ h3 {
     .predicted-score-box {
         padding: 8px;
         font-size: 0.95rem;
+    }
+
+    .prediction-badge-win, .prediction-badge-loss, .prediction-badge-unsure {
+        width: 50px; /* Adjust badge width for smaller screens */
     }
 }
 

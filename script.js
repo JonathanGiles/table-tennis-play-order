@@ -18,6 +18,44 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: 3, name: 'Player 3', skill: 1, team: 'opponent' }
     ];
 
+    // Helper functions to manage cookies
+    function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+    }
+
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let c = cookies[i].trim();
+            if (c.indexOf(nameEQ) === 0) {
+                return decodeURIComponent(c.substring(nameEQ.length, c.length));
+            }
+        }
+        return null;
+    }
+
+    // Load 'our team' player names from cookie if available
+    const savedOurPlayers = getCookie('ourPlayers');
+    if (savedOurPlayers) {
+        try {
+            const parsedPlayers = JSON.parse(savedOurPlayers);
+            if (Array.isArray(parsedPlayers)) {
+                ourPlayers = parsedPlayers;
+            }
+        } catch (e) {
+            console.error('Failed to parse saved ourPlayers cookie:', e);
+        }
+    }
+
+    // Save 'our team' player names to cookie when updated
+    function saveOurPlayersToCookie() {
+        setCookie('ourPlayers', JSON.stringify(ourPlayers), 7); // Save for 7 days
+    }
+
     // Helper: render team list based on array
     function renderTeamList(listEl, players) {
         listEl.innerHTML = '';
@@ -40,21 +78,25 @@ document.addEventListener('DOMContentLoaded', function() {
     renderTeamList(ourTeamList, ourPlayers);
     renderTeamList(opponentTeamList, opponentPlayers);
 
+    // Detect if the device is touch-enabled
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    // Adjust Sortable options based on device type
+    function initializeSortable(listEl) {
+        new Sortable(listEl, {
+            animation: 150,
+            ghostClass: 'sortable-ghost',
+            chosenClass: 'sortable-chosen',
+            handle: isTouchDevice ? '.drag-handle' : null, // Use drag handle only on touch devices
+            onEnd: updateStrategy
+        });
+    }
+
     // Initialize Sortable for our team list
-    new Sortable(ourTeamList, {
-        animation: 150,
-        ghostClass: 'sortable-ghost',
-        chosenClass: 'sortable-chosen',
-        onEnd: updateStrategy
-    });
+    initializeSortable(ourTeamList);
 
     // Initialize Sortable for opponent team list
-    new Sortable(opponentTeamList, {
-        animation: 150,
-        ghostClass: 'sortable-ghost',
-        chosenClass: 'sortable-chosen',
-        onEnd: updateStrategy
-    });
+    initializeSortable(opponentTeamList);
 
     // Initialize the combined ranking list
     initializeCombinedRanking();
@@ -64,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         animation: 150,
         ghostClass: 'sortable-ghost',
         chosenClass: 'sortable-chosen',
+        handle: isTouchDevice ? '.drag-handle' : null, // Use drag handle only on touch devices
         onEnd: function() {
             // Automatically apply rankings when players are reordered
             applyCustomRankings();
@@ -98,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
             });
             renderTeamList(ourTeamList, ourPlayers);
+            saveOurPlayersToCookie();
         } else {
             const old = opponentPlayers;
             opponentPlayers = inputNames.map((name, i) => {
@@ -254,6 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (player) {
                 player.name = name;
             }
+            saveOurPlayersToCookie();
         } else {
             player = opponentPlayers.find(p => p.id === id);
             if (player) {
