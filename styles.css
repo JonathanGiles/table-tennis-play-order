@@ -1,0 +1,429 @@
+/* Table Tennis Strategy Styles - Enhanced UI */
+
+:root {
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --secondary-color: #e74c3c;
+    --secondary-dark: #c0392b;
+    --standard-color: #6c5ce7;
+    --standard-dark: #574b90;
+    --optimal-color: #f1c40f;
+    --optimal-dark: #f39c12;
+    --success-color: #2ecc71;
+    --success-dark: #27ae60;
+    --warning-color: #f39c12;
+    --warning-dark: #d35400;
+    --light-gray: #f8f9fa;
+    --dark-gray: #343a40;
+}
+
+body {
+    background-color: #f5f9fc;
+    color: #2c3e50;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+h3 {
+    color: var(--dark-gray);
+    font-weight: 600;
+}
+
+/* Card styling */
+.card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    border-bottom: none;
+    padding: 0.8rem 1.25rem;
+}
+
+/* Team cards */
+.team-card {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.our-team-header {
+    background: linear-gradient(135deg, #1e5799, #207cca);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.opponent-team-header {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.edit-team-btn {
+    border-color: rgba(255,255,255,0.5);
+}
+
+.edit-team-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: white;
+}
+
+/* Ranking card */
+.ranking-card {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.ranking-header {
+    background: linear-gradient(135deg, #f1c40f, #f39c12);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Optimal card */
+.optimal-card {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.optimal-header {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Predictions card */
+.predictions-card {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.predictions-header {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+/* List items */
+.our-team-list li, .opponent-team-list li, .combined-ranking-list li {
+    cursor: grab;
+    transition: all 0.2s ease;
+    border: none;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.list-group-item {
+    padding: 0.5rem 0.75rem;
+    border-left: none;
+    border-right: none;
+}
+
+.list-group-item:hover {
+    background-color: var(--light-gray);
+}
+
+/* Drag handle for better touch experience */
+.drag-handle {
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    cursor: grab;
+    padding: 0 5px;
+}
+
+.drag-handle i {
+    font-size: 1rem;
+}
+
+.player-name {
+    font-weight: 500;
+}
+
+/* Combined ranking styles - Improved layout */
+.combined-ranking-list li {
+    margin-bottom: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+}
+
+.combined-ranking-list .list-group-item {
+    position: relative;
+    padding: 0.5rem 0.75rem;
+}
+
+.combined-ranking-list .our-player {
+    border-left: 5px solid var(--primary-color);
+    background-color: rgba(52, 152, 219, 0.05);
+    font-weight: bold;
+    color: #1e5799;
+}
+
+.combined-ranking-list .opponent-player {
+    border-left: 5px solid var(--secondary-color);
+    background-color: rgba(231, 76, 60, 0.05);
+    color: #8e44ad;
+}
+
+.player-rank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #6c757d;
+    color: white;
+    font-weight: 500;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.team-badge {
+    padding: 0.35em 0.65em;
+    border-radius: 20px;
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 8px;
+}
+
+.team-badge-us {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.team-badge-opposition {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Sortable styles */
+.sortable-ghost {
+    opacity: 0.5;
+    background-color: #e9ecef;
+}
+
+.sortable-chosen {
+    background-color: #e9ecef;
+}
+
+/* Edit button styling */
+.edit-btn {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Prediction styles */
+.prediction-win {
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+.prediction-loss {
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.prediction-unsure {
+    background-color: rgba(243, 156, 18, 0.1);
+}
+
+.prediction-badge-win {
+    background-color: var(--success-color);
+}
+
+.prediction-badge-loss {
+    background-color: var(--secondary-color);
+}
+
+.prediction-badge-unsure {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+.win-prediction {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.loss-prediction {
+    color: #e74c3c;
+}
+
+/* Optimal order */
+.optimal-order {
+    padding: 15px;
+}
+
+.optimal-order .row {
+    margin-top: 0.5rem;
+}
+
+.optimal-order .col-4 {
+    padding: 0.5rem;
+    border-radius: 5px;
+    background-color: rgba(46, 204, 113, 0.05);
+}
+
+.predicted-score-box {
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.2));
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 500;
+    margin-top: 1rem;
+    border: 1px solid rgba(46, 204, 113, 0.2);
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+/* Quick entry form */
+.quick-entry {
+    padding: 0.5rem;
+    border-radius: 8px;
+    background-color: rgba(231, 76, 60, 0.05);
+    border: 1px solid rgba(231, 76, 60, 0.1);
+}
+
+.apply-names-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+}
+
+.apply-names-btn:hover {
+    background-color: var(--secondary-dark);
+    color: white;
+}
+
+#quick-entry-container {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+/* Modal styles */
+#editTeamModal .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Table styling */
+.table {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: rgba(0, 206, 201, 0.1);
+    font-weight: 600;
+}
+
+.table-bordered td, .table-bordered th {
+    border-color: #e9ecef;
+}
+
+.badge {
+    font-weight: 500;
+    padding: 0.4em 0.6em;
+    border-radius: 4px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 767px) {
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .card-header h5 {
+        font-size: 1rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    .card-body {
+        padding: 0.75rem;
+    }
+    
+    .list-group-item {
+        padding: 0.75rem;
+    }
+    
+    /* Larger touch targets on mobile */
+    .drag-handle {
+        padding: 10px 5px;
+        margin: -10px 0;
+    }
+    
+    .drag-handle i {
+        font-size: 1.2rem;
+    }
+    
+    .edit-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    /* Touch feedback */
+    .list-group-item:active {
+        background-color: #e9ecef;
+    }
+    
+    .table {
+        font-size: 0.9rem;
+    }
+
+    .table th, .table td {
+        padding: 0.5rem;
+    }
+    
+    .badge {
+        font-size: 0.75rem;
+    }
+    
+    .player-rank {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .predicted-score-box {
+        padding: 8px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Animation */
+@keyframes highlight {
+    0% { background-color: rgba(52, 152, 219, 0.2); }
+    100% { background-color: transparent; }
+}
+
+.highlight {
+    animation: highlight 1s;
+}

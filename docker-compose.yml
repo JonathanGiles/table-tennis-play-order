@@ -1,0 +1,10 @@
+
+services:
+  app:
+    image: nginx:alpine
+    container_name: table-tennis-app
+    ports:
+      - "8654:80"
+    volumes:
+      - .:/usr/share/nginx/html
+    restart: unless-stopped
