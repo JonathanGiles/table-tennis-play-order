@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const parsedPlayers = JSON.parse(savedOurPlayers);
             if (Array.isArray(parsedPlayers)) {
                 ourPlayers = parsedPlayers;
+                renderTeamList(ourTeamList, ourPlayers);
             }
         } catch (e) {
             console.error('Failed to parse saved ourPlayers cookie:', e);
@@ -54,6 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Save 'our team' player names to cookie when updated
     function saveOurPlayersToCookie() {
         setCookie('ourPlayers', JSON.stringify(ourPlayers), 7); // Save for 7 days
+    }
+
+    // Save the current order of 'our team' players to the cookie
+    function saveOurPlayerOrderToCookie() {
+        const currentOrder = getPlayerOrder(ourTeamList).map(id => ourPlayers.find(p => p.id === id));
+        setCookie('ourPlayers', JSON.stringify(currentOrder), 7); // Save for 7 days
     }
 
     // Helper: render team list based on array
@@ -88,7 +95,12 @@ document.addEventListener('DOMContentLoaded', function() {
             ghostClass: 'sortable-ghost',
             chosenClass: 'sortable-chosen',
             handle: isTouchDevice ? '.drag-handle' : null, // Use drag handle only on touch devices
-            onEnd: updateStrategy
+            onEnd: function() {
+                updateStrategy();
+                if (listEl === ourTeamList) {
+                    saveOurPlayerOrderToCookie();
+                }
+            }
         });
     }
 
