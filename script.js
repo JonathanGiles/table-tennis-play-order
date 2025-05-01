@@ -114,8 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Rebuild combined players and ranking
         combinedPlayers = [...ourPlayers, ...opponentPlayers];
         initializeCombinedRanking();
-        // Apply strategy updates
-         
+        updateStrategy();
         // Hide modal
         const modalEl = document.getElementById('editTeamModal');
         const modal = bootstrap.Modal.getInstance(modalEl);
